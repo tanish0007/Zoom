@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend of video-conference application",
+  "license": "MIT",
+  "author": "Tanish Jangra",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
+    "pm2": "pm2 src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "http-status": "^2.1.0",
+    "mongoose": "^8.12.1",
+    "socket.io": "^4.8.1"
+  }
+}
