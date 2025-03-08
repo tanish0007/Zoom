@@ -11,6 +11,8 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
+app.use(cors());
+
 app.set("PORT", (process.env.PORT || 8080));
 
 app.get('/home', (req,res) => {
@@ -18,7 +20,13 @@ app.get('/home', (req,res) => {
 })
 
 const start = async () => {
-    const connectionDB = await mongoose.connect(process.env.MONGO_URL);
+    try{
+        const connectionDB = await mongoose.connect(process.env.MONGO_URI);
+        console.log(`MongoDB connected with host: ${connectionDB.connection.host}`);
+    }
+    catch(error){
+        console.log("Error: ",error)
+    }
 
     server.listen(app.get("PORT"), () => {
         console.log(`Listening on port: ${app.get("PORT")}`);
