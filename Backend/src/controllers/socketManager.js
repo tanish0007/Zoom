@@ -15,7 +15,8 @@ export const connectToSocket = (server) => {
     });
 
     io.on('connection', (socket) => {
-        socket.on("Join-call", (path) => {
+
+        socket.on("join-call", (path) => {
             if(connections[path] === undefined) {
                 connections[path] = [];
             }
@@ -28,7 +29,8 @@ export const connectToSocket = (server) => {
 
             if(messages[path] !== undefined) {
                 for(let a = 0; a < messages[path].length; ++a) {
-                    io.to(socket.id).emit("chat-message", messages[path][a]['data'], messages[path][a]['sender'], messages[path][a]['socket-id-sender']);
+                    io.to(socket.id).emit("chat-message", messages[path][a]['data'],
+                         messages[path][a]['sender'], messages[path][a]['socket-id-sender']);
                 }
             }
         })
@@ -46,26 +48,26 @@ export const connectToSocket = (server) => {
                 return [room, isFound];
             }, ['', false]);
 
-            if (found == true){
-                if(messages[matchingRoom] == undefined) {
+            if (found === true){
+                if(messages[matchingRoom] === undefined) {
                     messages[matchingRoom] = []
                 }
-                messages[matchingRoom].push({'sender': sender, "data": data, "socket-id-sender": socket.id})
-                console.log("message", key, ":", sender, data);
+                messages[matchingRoom].push({"sender": sender, "data": data, "socket-id-sender": socket.id})
+                console.log("message", key, ":", sender, " " ,data);
 
                 connections[matchingRoom].forEach(element => {
                     io.to(element).emit("chat-message", data, sender, socket.id)
-                });
+                })
             }
         })
 
-        socket.on("disconnect", ()=> {
+        socket.on("disconnect", () => {
             var diffTime = Math.abs(timeOnLine[socket.id] - new Date());
             var key;
 
             for(const [k,v] of JSON.parse(JSON.stringify(Object.entries(connections)))) {
                 for(let a=0; a < v.length; ++a){
-                    if(v[a] == socket.id){
+                    if(v[a] ===  socket.id){
                         key = k;
 
                         for(let a = 0; a < connections[key].length; ++a){
