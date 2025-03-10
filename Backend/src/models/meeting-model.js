@@ -10,4 +10,4 @@ const meetingSchema = new Schema(
 
 const Meeting = mongoose.model("Meeting", meetingSchema);
 
-export {Meeting};
+export { Meeting };
