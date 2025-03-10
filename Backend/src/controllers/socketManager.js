@@ -5,7 +5,14 @@ let messages = {}
 let timeOnLine = {}
 
 export const connectToSocket = (server) => {
-    const io = new Server(server);
+    const io = new Server(server, {
+        cors: {
+            origin: "*",
+            methods: ["GET", "POST"],
+            allowedHeaders: ["*"],
+            credentials: true
+        }
+    });
 
     io.on('connection', (socket) => {
         socket.on("Join-call", (path) => {
@@ -68,7 +75,7 @@ export const connectToSocket = (server) => {
                         var index = connections[key].indexOf(socket.id);
                         connections[key].splice(index, 1);
 
-                        if(connections[key].length == 0){
+                        if(connections[key].length === 0){
                             delete connections[key];
                         }
                     }
