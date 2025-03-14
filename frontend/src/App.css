@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+.landing-page-container {
+    width: 100%;
+    height: 100vh;
+    background: url(../public/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.landing-page-container .navbar {
+    color: white;
+    padding-inline: 1.2rem;
+    padding-block: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.landing-page-container .navbar h2{
+    font-size: 32px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.landing-page-container .navbar .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    cursor: pointer;
+}
+.landing-page-container .navbar .nav-list div[role="button"] {
+    width: fit-content;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    box-shadow: 1px 6px 10px 1px blueviolet;
+    border-radius: 10px;
+    transition: all .5s ease-in-out;
+}
+.landing-page-container .navbar .nav-list div[role="button"]:hover {
+    box-shadow: 1px 1px 10px 1px crimson;
+}
+.landing-page-container .navbar .nav-list div[role="button"] a{
+    text-decoration: none;
+    color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.landing-main-container{ 
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 3rem;
+    height: 80vh;
+    align-items: center;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.landing-main-container > div:nth-child(1) h1{
+    font-size: 3rem;
+}
+.landing-main-container > div:nth-child(1) p{
+    font-size: 1rem;
+}
+.landing-main-container > div:nth-child(1) div[role="button"]{
+    padding: 1rem 1.5rem;
+    width: fit-content;
+    border-radius: 10px;
+    margin-block-start: 1rem;
+    cursor: pointer;
+    box-shadow: 1px 6px 10px 1px blueviolet;
+    transition: all .5s ease-in-out;
+}
+.landing-main-container > div:nth-child(1) div[role="button"]:hover {
+    box-shadow: 1px 1px 10px 1px crimson;
+}
+.landing-main-container > div:nth-child(1) div[role="button"] a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+}
+.landing-main-container > div:nth-child(2) img{
+    width: 25rem;
 }
