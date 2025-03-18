@@ -8,7 +8,7 @@ export default function LandingPage() {
       <div className="landing-page-container">
         <nav className='navbar'>
           <div className='nav-logo'>
-            <h2>Dur-Darshan</h2>
+            <h2>MomentSync</h2>
           </div>
           <div className='nav-list'>
             <p>Join as Guest</p>
@@ -24,7 +24,7 @@ export default function LandingPage() {
             <h1>Turning <span style={{color: "blueviolet"}}>miles</span> into <span style={{color: "crimson"}}>moments</span></h1>
             <p>From anywhere to everywhere , we bring you closer<br/>to your loved ones</p>
             <div role='button'>
-              <Link to="/home">Get Started</Link>
+              <Link to="/auth">Get Started</Link>
             </div>
           </div>
           <div>
