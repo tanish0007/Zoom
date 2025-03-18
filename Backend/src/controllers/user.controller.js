@@ -4,7 +4,6 @@ import bcrypt, {hash} from "bcrypt";
 import crypto from "crypto";
 import mongoose from "mongoose"
 
-
 const login = async(req, res) => {
     const {username, password} = req.body;
     

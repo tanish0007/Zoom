@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose"
 
 const meetingSchema = new Schema(
     {
-        user_id: {type: String, required: true},
+        user_id: {type: String},
         meeting_code: {type: String, required: true},
         date: {type: date, default: Date.now(), required: true}
     }
