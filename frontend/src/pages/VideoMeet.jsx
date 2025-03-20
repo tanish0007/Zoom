@@ -1,4 +1,6 @@
-import React , { useRef, useState } from 'react';
+import React , { useEffect, useRef, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import "../styles/VideoComponent.css";
 
 
@@ -42,12 +44,66 @@ export default function VideoMeetComponent() {
 
     // }
 
+    const getPermissions = async () => {
+        try{
+            const videoPermission = await navigator.mediaDevices.getUserMedia({video: true});
+            if(videoPermission) {
+                setVideoAvailable(true);
+            } else {
+                setVideoAvailable(false);
+            }
+
+            const audioPermission = await navigator.mediaDevices.getUserMedia({audio: true});
+            if(audioPermission) {
+                setAudioAvailable(true);
+            } else {
+                setAudioAvailable(false);
+            }   
+
+            if(navigator.mediaDevices.getDisplayMedia) {
+                setScreenAvailable(true)
+            } else {
+                setScreenAvailable(false)
+            }
+
+            if (videoAvailable || audioAvailable) {
+                const userMediaStream = await navigator.mediaDevices.getUserMedia({video: videoAvailable, audio: audioAvailable});
+
+                if(userMediaStream) {
+                    window.localStream = userMediaStream;
+                    if(localVideoRef.current) {
+                            localVideoRef.current.srcObject = userMediaStream;
+                    }
+                }
+            }
+
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getPermissions();
+    }, [])
+
+
+    let getMedia = () => {
+        setVideo(videoAvailable);
+        setAudio(audioAvailable);
+        // connectToSocketServer();
+    }
+
   return (
     <div>
         { askForUsername === true ? 
             <div>
 
-                
+                <h2>Enter into Lobby</h2>
+                <TextField id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
+                <Button variant="contained">Connect</Button>
+                <div>
+                    <video ref={localVideoRef} autoPlay muted ></video>
+                </div>
 
             </div> : <></>
         } 
