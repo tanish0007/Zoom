@@ -86,6 +86,31 @@ export default function VideoMeetComponent() {
         getPermissions();
     }, [])
 
+    let getUserMediaSuccess = (stream) => {
+
+    }
+
+    let getUserMedia = () => {
+        if((video && videoAvailable) || (audio && audioAvailable)) {
+            navigator.mediaDevices.getUserMedia({video: video, audio: audio})
+                .then(getUserMediaSuccess()) 
+                .then((stream) => {})
+                .catch((e) => console.log(e))
+        } else {
+            try{
+                let tracks = localVideoRef.current.srcObject.getTracks();
+                tracks.forEach(track => track.stop())
+            } catch(err){
+                console.log(err)
+            }
+        }
+    }
+
+    useEffect(() => {
+        if(video !== undefined && audio !== undefined) {
+            getUserMedia();
+        }
+    }, [audio, video])
 
     let getMedia = () => {
         setVideo(videoAvailable);
@@ -93,6 +118,14 @@ export default function VideoMeetComponent() {
         // connectToSocketServer();
     }
 
+    // const handleConnect = () => {
+    //     if (username.trim() !== "") {
+    //         setAskForUsername(false);
+    //     } else {
+    //         alert("Please enter a username");
+    //     }
+    // }
+    const connect = undefined;
   return (
     <div>
         { askForUsername === true ? 
@@ -100,7 +133,7 @@ export default function VideoMeetComponent() {
 
                 <h2>Enter into Lobby</h2>
                 <TextField id="outlined-basic" label="Username" value={username} onChange={e => setUsername(e.target.value)} variant="outlined" />
-                <Button variant="contained">Connect</Button>
+                <Button variant="contained" onClick={connect}>Connect</Button>
                 <div>
                     <video ref={localVideoRef} autoPlay muted ></video>
                 </div>
