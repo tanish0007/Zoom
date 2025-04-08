@@ -82,7 +82,7 @@ export default function Authentication() {
 
                         <div>
                             <Button variant={formState === 0 ? "contained" : ""} onClick={() => { setFormState(0) }}>
-                                Sign In
+                                Login
                             </Button>
                             <Button variant={formState === 1 ? "contained" : ""} onClick={() => { setFormState(1) }}>
                                 Sign Up

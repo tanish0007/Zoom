@@ -22,3 +22,17 @@
 .buttonContainer  svg {
     font-size: 2.5rem;
 }
+
+.conferenceView {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.conferenceView > video {
+    width: 40vw;
+    height: 20vh;
+    min-width: 30vw;
+    border-radius: 10px;
+}
+

@@ -311,12 +311,21 @@ export default function VideoMeetComponent() {
     let getMedia = () => {
         setVideo(videoAvailable);
         setAudio(audioAvailable);
-        // connectToSocketServer();
+        connectToSocketServer();   // don't know if working or not
     }
     const connect = () => {
         setAskForUsername(false);
         getMedia();
     };
+
+    let handleVideo = () => {
+        setVideo(!video);
+    }
+
+    let handleAudio = () => {
+        setAudio(!audio);
+    }
+
   return (
     <div>
         { askForUsername === true ? 
@@ -333,13 +342,13 @@ export default function VideoMeetComponent() {
             <div className={styles.meetVideoContainer}>
 
                 <div className={styles.buttonContainer}>
-                    <IconButton style={{color: "white"}}>
+                    <IconButton onClick={handleVideo} style={{color: "white"}}>
                         {(video===true) ? <VideocamIcon /> : <VideocamOffIcon />}
                     </IconButton>
                     <IconButton style={{color: "red"}}>
                         <CallEndIcon />
                     </IconButton>
-                    <IconButton style={{color: "white"}}>
+                    <IconButton onClick={handleAudio} style={{color: "white"}}>
                         {(audio===true) ? <MicIcon /> : <MicOffIcon />}
                     </IconButton>
 
@@ -349,7 +358,7 @@ export default function VideoMeetComponent() {
                     </IconButton>
                     : <></>}
 
-                    <Badge badgeContent={newMessages}>
+                    <Badge badgeContent={newMessages} max={999} color='secondary'>
                         <IconButton style={{color: "blue"}}>
                             <ChatIcon />
                         </IconButton>
@@ -357,8 +366,9 @@ export default function VideoMeetComponent() {
                 </div>
 
                 <video className={styles.meetUserVideo} ref={localVideoRef} autoPlay muted></video>
+                <div className={styles.conferenceView}>
                 {videos.map((video)=>(
-                    <div className={styles.conferenceView} key={video.socketId}>
+                    <div key={video.socketId}>
                         <h2>{video.socketId}</h2>
                         <video 
                         data-socket={video.socketId} 
@@ -371,6 +381,7 @@ export default function VideoMeetComponent() {
                         ></video>
                     </div>
                 ))}
+                </div>
             </div>
         } 
     </div>
