@@ -8,7 +8,6 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Grid2 from '@mui/material/Grid2';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -24,19 +23,29 @@ const defaultTheme = createTheme();
 
 export default function Authentication() {
 
+    
+
     const [username, setUsername] = React.useState();
     const [password, setPassword] = React.useState();
     const [name, setName] = React.useState();
     const [error, setError] = React.useState();
     const [message, setMessage] = React.useState();
+
+
     const [formState, setFormState] = React.useState(0);
+
     const [open, setOpen] = React.useState(false)
+
+
     const { handleRegister, handleLogin } = React.useContext(AuthContext);
 
     let handleAuth = async () => {
         try {
             if (formState === 0) {
+
                 let result = await handleLogin(username, password)
+
+
             }
             if (formState === 1) {
                 let result = await handleRegister(name, username, password);
@@ -47,7 +56,7 @@ export default function Authentication() {
                 setError("")
                 setFormState(0)
                 setPassword("")
-            }   
+            }
         } catch (err) {
 
             console.log(err);
@@ -61,7 +70,12 @@ export default function Authentication() {
         <ThemeProvider theme={defaultTheme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
-                <Grid item xs={false} sm={4} md={7} sx={{
+                <Grid
+                    item
+                    xs={false}
+                    sm={4}
+                    md={7}
+                    sx={{
                         backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
@@ -72,7 +86,12 @@ export default function Authentication() {
                 />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                     <Box
-                        sx={{ my: 8, mx: 4, display: 'flex', flexDirection: 'column', alignItems: 'center',
+                        sx={{
+                            my: 8,
+                            mx: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
                         }}
                     >
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -82,7 +101,7 @@ export default function Authentication() {
 
                         <div>
                             <Button variant={formState === 0 ? "contained" : ""} onClick={() => { setFormState(0) }}>
-                                Login
+                                Sign In
                             </Button>
                             <Button variant={formState === 1 ? "contained" : ""} onClick={() => { setFormState(1) }}>
                                 Sign Up
@@ -112,6 +131,7 @@ export default function Authentication() {
                                 value={username}
                                 autoFocus
                                 onChange={(e) => setUsername(e.target.value)}
+
                             />
                             <TextField
                                 margin="normal"
@@ -122,6 +142,7 @@ export default function Authentication() {
                                 value={password}
                                 type="password"
                                 onChange={(e) => setPassword(e.target.value)}
+
                                 id="password"
                             />
 
@@ -141,11 +162,14 @@ export default function Authentication() {
                     </Box>
                 </Grid>
             </Grid>
+
             <Snackbar
+
                 open={open}
                 autoHideDuration={4000}
                 message={message}
             />
+
         </ThemeProvider>
     );
 }
